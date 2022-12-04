@@ -1,0 +1,19 @@
+<p>main-grid-page works!</p>
+
+<div id="demo-container" class="container-fluid">
+    <h2>
+      {{title}}
+    </h2>
+    <div class="subtitle" [innerHTML]="subTitle"></div>
+  
+    <h3>Grid 1</h3>
+    <div id="grid1" style="height: 800px; width: 600px;">
+      <div id="slickGridContainer-grid1" class="gridPane" style="width: 100%;">
+      </div>
+    </div>
+    <angular-slickgrid gridId="grid1"
+                       [columnDefinitions]="columnDefinitions_1"
+                       [gridOptions]="gridOptions_1"
+                       [dataset]="dataset_1">
+    </angular-slickgrid>
+</div>
