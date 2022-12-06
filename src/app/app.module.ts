@@ -131,7 +131,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     SwtCommonGridPaginationComponent,
     SwtCommonGridComponent,
     HomeComponent,
-    MainGridPageComponent
+    MainGridPageComponent,
   ],
   imports: [
     AppRoutingRoutingModule,
