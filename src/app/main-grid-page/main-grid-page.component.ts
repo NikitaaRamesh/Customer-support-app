@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, enableProdMode, OnInit , ViewEncapsulation} from '@angular/core';
 import { Column, GridOption, Formatters } from './../modules/angular-slickgrid'
 
 const ITEMSNo = 995;
 
 @Component({
-  templateUrl: './main-grid-page.component.html'
+  templateUrl: './main-grid-page.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 
 export class MainGridPageComponent implements OnInit {
@@ -12,6 +13,7 @@ export class MainGridPageComponent implements OnInit {
   subTitle = `
   Hope the data works
   `;
+
   columnDefinitions_1: Column[] = [];
   gridOptions_1!: GridOption;
   dataset_1!: any[];
@@ -28,15 +30,16 @@ export class MainGridPageComponent implements OnInit {
       { id: 'last-login-date', name: 'Last Login date', field: 'lastLoginDate', formatter: Formatters.dateIso }
     ];
     this.gridOptions_1 = {
-      enableAutoResize: false,
-      enableSorting: true,
-      gridHeight: 225,
-      gridWidth: 800,
-      enablePagination: true,
-      pagination: {
-        pageSizes: [5, 10, 20, 25, 50],
-        pageSize: 5
+      autoResize: {
+        applyResizeToContainer: true,
+        calculateAvailableSizeBy: 'window',
+        bottomPadding: 20,
+        minHeight: 180,
+        minWidth: 300,
+        rightPadding: 0
       },
+      enableSorting: true,
+      autoFitColumnsOnFirstLoad: true,
     };
 
     this.dataset_1 = this.mockDataItems(ITEMSNo);
