@@ -16,11 +16,8 @@ export class GridBasicComponent implements OnInit {
   `;
 
   columnDefinitions1: Column[] = [];
-  columnDefinitions2: Column[] = [];
   gridOptions1!: GridOption;
-  gridOptions2!: GridOption;
   dataset1!: any[];
-  dataset2!: any[];
 
   ngOnInit(): void {
     this.columnDefinitions1 = [
@@ -40,21 +37,10 @@ export class GridBasicComponent implements OnInit {
 
     // copy the same Grid Options and Column Definitions to 2nd grid
     // but also add Pagination in this grid
-    this.columnDefinitions2 = this.columnDefinitions1;
-    this.gridOptions2 = {
-      ...this.gridOptions1,
-      ...{
-        enablePagination: true,
-        pagination: {
-          pageSizes: [5, 10, 20, 25, 50],
-          pageSize: 5
-        },
-      }
-    };
+   
 
     // mock some data (different in each dataset)
     this.dataset1 = this.mockData(NB_ITEMS);
-    this.dataset2 = this.mockData(NB_ITEMS);
   }
 
   mockData(count: number) {

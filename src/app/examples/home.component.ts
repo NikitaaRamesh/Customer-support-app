@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  title = 'Angular-Slickgrid - Demo Site';
-  subTitle = 'This site is to demo multiple usage of Angular-Slickgrid, choose an example from left side menu';
+  title = 'Planytics Customer Support App ';
+  subTitle = 'This app is for the customer support team for user management.';
 }
