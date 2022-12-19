@@ -1,16 +1,14 @@
-<p>main-grid-page works!</p>
-
 <div id="demo-container" class="container-fluid">
   <h2>
     {{title}}
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
-  <h3>Grid 1</h3>
   <angular-slickgrid gridId="grid1"
                        [columnDefinitions]="columnDefinitions_1"
                        [gridOptions]="gridOptions_1"
-                       [dataset]="dataset_1">
+                       [dataset]="dataset_1"
+                       (onAngularGridCreated)="angularGridReady($event.detail)">
                        
   </angular-slickgrid>
 </div>

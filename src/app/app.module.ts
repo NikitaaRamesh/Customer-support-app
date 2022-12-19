@@ -50,6 +50,7 @@ import { RowDetailPreloadComponent } from './examples/rowdetail-preload.componen
 import { RowDetailViewComponent } from './examples/rowdetail-view.component';
 import { MainGridPageComponent } from './main-grid-page/main-grid-page.component';
 
+
 import { SwtCommonGridTestComponent } from './examples/swt-common-grid-test.component';
 import { SwtCommonGridPaginationComponent } from './examples/swt-common-grid-pagination.component';
 import { SwtCommonGridComponent } from './examples/swt-common-grid.component';
@@ -61,6 +62,7 @@ import { AngularSlickgridModule } from './modules/angular-slickgrid/modules/angu
 
 // load necessary Flatpickr Locale(s), but make sure it's imported AFTER the SlickgridModule import
 import 'flatpickr/dist/l10n/fr';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 
 // AoT requires an exported function for factories
@@ -132,6 +134,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     SwtCommonGridComponent,
     HomeComponent,
     MainGridPageComponent,
+    UserDetailsComponent,
   ],
   imports: [
     AppRoutingRoutingModule,
@@ -139,6 +142,8 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     FormsModule,
     HttpClientModule,
     NgSelectModule,
+    
+
     TabsModule.forRoot(),
     TranslateModule.forRoot({
       loader: {

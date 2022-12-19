@@ -1,7 +1,24 @@
 import { Component, enableProdMode, OnInit, ViewEncapsulation } from '@angular/core';
-import { Column, GridOption, Formatters } from './../modules/angular-slickgrid'
+import { link } from 'fs';
+import { AngularGridInstance, Column, GridOption, Formatters, Formatter, FieldType } from './../modules/angular-slickgrid'
+
+interface DataItem {
+  id: number;
+  username: number;
+  dateCreated: Date;
+  organizationName: string;
+  unitName: string;
+  uuid: string;
+  lastLoginDate: Date;
+}
 
 const ITEMSNo = 995;
+
+const customEnableButtonFormatter: Formatter<DataItem> = (_row: number, _cell: number, value: any) => {
+  return `<span style="margin-left: 5px">
+    <a routerLinkActive="active" [routerLink]="['/home']">Link</a>
+    </span>`;
+};
 
 @Component({
   templateUrl: './main-grid-page.component.html',
@@ -9,21 +26,29 @@ const ITEMSNo = 995;
 })
 
 export class MainGridPageComponent implements OnInit {
-  title = 'Grid data';
+  title = 'User Management';
   subTitle = `
-  Hope the data works
+  Welcome to User Management screen!
   `;
 
   columnDefinitions_1: Column[] = [];
   gridOptions_1: GridOption = {};
   dataset_1!: any[];
+  angularGrid!: AngularGridInstance;
+
+  angularGridReady(angularGrid: AngularGridInstance) {
+    this.angularGrid = angularGrid;
+  }
 
 
-  ngOnInit() {
+  ngOnInit():void {
     this.columnDefinitions_1 = [
-      { id: 's-no', name: 'S_No', field: 'id', sortable: true },
-      { id: 'username', name: 'Username', field: 'username', sortable: true },
-      { id: 'date-created', name: 'Date Created', field: 'dateCreated', formatter: Formatters.dateIso },
+      { id: 's-no', name: 'S_No', field: 'id', sortable: true, width:80, minWidth:20, maxWidth:80 },
+      { id: 'username', name: 'Username', field: 'username', type: FieldType.number, sortable: true, formatter: customEnableButtonFormatter,
+      onCellClick: (e, args) => {
+        this.toggleCompletedProperty(args && args.dataContext);
+      }},
+      { id: 'date-created', name: 'Date Created', field: 'dateCreated', formatter: Formatters.dateIso , width:80, minWidth:20, maxWidth:150},
       { id: 'organization-name', name: 'Organization name', field: 'organizationName', sortable: true },
       { id: 'unit-name', name: 'Unit name', field: 'unitName', sortable: true },
       { id: 'uuid', name: 'UUID', field: 'uuid', sortable: true },
@@ -40,7 +65,7 @@ export class MainGridPageComponent implements OnInit {
         bottomPadding: 20,
         minHeight: 180,
         minWidth: 300,
-        rightPadding: 30
+        rightPadding: 80
       },
       cellHighlightCssClass: 'slick-cell-modified',
       checkboxSelector: {
@@ -61,7 +86,6 @@ export class MainGridPageComponent implements OnInit {
 
       mockDatasetItems[j] = {
         id: j,
-        username: 'User ' + j,
         dateCreated: new Date(randYear, randMonth + 1, randDay),
         organizationName: 'Organization ' + j,
         unitName: 'Unit ' + j,
@@ -71,5 +95,16 @@ export class MainGridPageComponent implements OnInit {
     }
 
     return mockDatasetItems;
+  }
+  toggleCompletedProperty(item: any) {
+    // toggle property
+    if (typeof item === 'object') {
+      item.completed = !item.completed;
+
+      // simulate a backend http call and refresh the grid row after delay
+      setTimeout(() => {
+        this.angularGrid.gridService.updateItemById(item.id, item, { highlightRow: false });
+      }, 250);
+    }
   }
 }
