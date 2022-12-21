@@ -1,6 +1,7 @@
 import { HomeComponent } from './examples/home.component';
 import { MainGridPageComponent } from './main-grid-page/main-grid-page.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -19,7 +20,8 @@ const routes: Routes = [
     },
   ]
   },
-  { path: '', redirectTo: '/main-grid-page', pathMatch: 'full' },
+  { path: 'login-page', component: LoginPageComponent},
+  { path: '', redirectTo: '/login-page', pathMatch: 'full' },
   { path: '**', redirectTo: '/main-grid-page', pathMatch: 'full' }
 ];
 

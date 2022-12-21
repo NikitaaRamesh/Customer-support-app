@@ -1,5 +1,10 @@
 import { Component, enableProdMode, OnInit, ViewEncapsulation } from '@angular/core';
 import { link } from 'fs';
+import { Router } from '@angular/router';
+import { UserDetailsComponent } from '../user-details/user-details.component';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { AngularGridInstance, Column, GridOption, Formatters, Formatter, FieldType } from './../modules/angular-slickgrid'
 
 interface DataItem {
@@ -12,11 +17,13 @@ interface DataItem {
   lastLoginDate: Date;
 }
 
+
+
 const ITEMSNo = 995;
 
 const customEnableButtonFormatter: Formatter<DataItem> = (_row: number, _cell: number, value: any) => {
   return `<span style="margin-left: 5px">
-    <a routerLinkActive="active" [routerLink]="['/home']">Link</a>
+    <a routerLinkActive="active" [routerLink]="['/main-grid-page']">Link</a>
     </span>`;
 };
 
@@ -39,6 +46,8 @@ export class MainGridPageComponent implements OnInit {
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
   }
+
+  constructor(private router: Router){}
 
 
   ngOnInit():void {
@@ -107,4 +116,8 @@ export class MainGridPageComponent implements OnInit {
       }, 250);
     }
   }
+
+  btnClick=  () => {
+    this.router.navigate(['/main-grid-page/:id']);
+};
 }

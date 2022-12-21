@@ -63,6 +63,7 @@ import { AngularSlickgridModule } from './modules/angular-slickgrid/modules/angu
 // load necessary Flatpickr Locale(s), but make sure it's imported AFTER the SlickgridModule import
 import 'flatpickr/dist/l10n/fr';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 // AoT requires an exported function for factories
@@ -135,6 +136,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     HomeComponent,
     MainGridPageComponent,
     UserDetailsComponent,
+    LoginPageComponent,
   ],
   imports: [
     AppRoutingRoutingModule,
@@ -142,7 +144,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     FormsModule,
     HttpClientModule,
     NgSelectModule,
-    
+
 
     TabsModule.forRoot(),
     TranslateModule.forRoot({
