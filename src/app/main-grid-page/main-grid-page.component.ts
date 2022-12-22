@@ -55,7 +55,8 @@ export class MainGridPageComponent implements OnInit {
       { id: 's-no', name: 'S_No', field: 'id', sortable: true, width:80, minWidth:20, maxWidth:80 },
       { id: 'username', name: 'Username', field: 'username', type: FieldType.number, sortable: true, formatter: customEnableButtonFormatter,
       onCellClick: (e, args) => {
-        this.toggleCompletedProperty(args && args.dataContext);
+        //this.toggleCompletedProperty(args && args.dataContext);
+        this.router.navigate(['/main-grid-page/:id']);
       }},
       { id: 'date-created', name: 'Date Created', field: 'dateCreated', formatter: Formatters.dateIso , width:80, minWidth:20, maxWidth:150},
       { id: 'organization-name', name: 'Organization name', field: 'organizationName', sortable: true },
