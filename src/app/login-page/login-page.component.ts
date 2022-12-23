@@ -35,7 +35,7 @@ export class LoginPageComponent implements OnInit {
       var cognitoUser = new CognitoUser(userData);
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-          this.router.navigate(["dashboard"])
+          this.router.navigate(["main-grid-page"])
         },
         onFailure: (err) => {
           alert(err.message || JSON.stringify(err));
