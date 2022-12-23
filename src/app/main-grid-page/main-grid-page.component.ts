@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserDetailsComponent } from '../user-details/user-details.component';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import { environment } from 'src/environments/environment';
 
 import { AngularGridInstance, Column, GridOption, Formatters, Formatter, FieldType } from './../modules/angular-slickgrid'
 
@@ -47,18 +49,20 @@ export class MainGridPageComponent implements OnInit {
     this.angularGrid = angularGrid;
   }
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.columnDefinitions_1 = [
-      { id: 's-no', name: 'S_No', field: 'id', sortable: true, width:80, minWidth:20, maxWidth:80 },
-      { id: 'username', name: 'Username', field: 'username', type: FieldType.number, sortable: true, formatter: customEnableButtonFormatter,
-      onCellClick: (e, args) => {
-        //this.toggleCompletedProperty(args && args.dataContext);
-        this.router.navigate(['/main-grid-page/:id']);
-      }},
-      { id: 'date-created', name: 'Date Created', field: 'dateCreated', formatter: Formatters.dateIso , width:80, minWidth:20, maxWidth:150},
+      { id: 's-no', name: 'S_No', field: 'id', sortable: true, width: 80, minWidth: 20, maxWidth: 80 },
+      {
+        id: 'username', name: 'Username', field: 'username', type: FieldType.number, sortable: true, formatter: customEnableButtonFormatter,
+        onCellClick: (e, args) => {
+          //this.toggleCompletedProperty(args && args.dataContext);
+          this.router.navigate(['/main-grid-page/:id']);
+        }
+      },
+      { id: 'date-created', name: 'Date Created', field: 'dateCreated', formatter: Formatters.dateIso, width: 80, minWidth: 20, maxWidth: 150 },
       { id: 'organization-name', name: 'Organization name', field: 'organizationName', sortable: true },
       { id: 'unit-name', name: 'Unit name', field: 'unitName', sortable: true },
       { id: 'uuid', name: 'UUID', field: 'uuid', sortable: true },
@@ -118,7 +122,20 @@ export class MainGridPageComponent implements OnInit {
     }
   }
 
-  btnClick=  () => {
+  btnClick = () => {
     this.router.navigate(['/main-grid-page/:id']);
-};
+  };
+  onLogout(): void {
+    let poolData = {
+      UserPoolId: environment.cognitoUserPoolId,
+      ClientId: environment.cognitoAppClientId
+    };
+    let userPool = new CognitoUserPool(poolData);
+    let cognitoUser = userPool.getCurrentUser();
+    cognitoUser?.signOut();
+    this.router.navigate(["signin"])
+  }
 }
+
+
+

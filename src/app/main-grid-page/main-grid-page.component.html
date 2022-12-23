@@ -4,7 +4,7 @@
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
   <button type="button" class="btn btn-primary-outline pull-right" (click)="btnClick();"><i class="fa fa-plus"></i> Add</button>
-  
+  <button (click)="onLogout()">Log out</button>
   <angular-slickgrid gridId="grid1"
                        [columnDefinitions]="columnDefinitions_1"
                        [gridOptions]="gridOptions_1"

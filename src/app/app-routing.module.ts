@@ -6,6 +6,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from './auth/auth.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -28,5 +29,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }), TranslateModule],
   exports: [RouterModule, TranslateModule],
+  providers: [AuthService]
 })
 export class AppRoutingRoutingModule { }

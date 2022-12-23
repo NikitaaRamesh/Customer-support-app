@@ -1,38 +1,10 @@
-<body>
-  <div class="container">
-    <br>
-    <br>
-    <br>
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card border-0 shadow rounded-3 my-5">
-          <div class="card-body p-4 p-sm-5">
-            <img src="https://planytics.ai/images/planytics.svg">
-            <br>
-            <hr>
-            <form>
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-              </div>
 
-              <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
-                <label class="form-check-label" for="rememberPasswordCheck">
-                  Remember password
-                </label>
-              </div>
-              <div class="d-grid">
-                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign
-                  in</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<form (submit)="onSignIn(signInForm)" #signInForm="ngForm">
+  <label for="email"><b>Email address</b></label>
+  <input name="email" ngModel type="email" #emailInput="ngModel" [(ngModel)]="email_address" email placeholder="Enter Username" required>
+
+  <label for="password"><b>Password</b></label>
+  <input [(ngModel)]="password" ngModel type="password" minlength="8" #passwordInput="ngModel" required name="password" placeholder="Enter Password" >
+
+  <button type="submit">Login</button>
+</form>  
