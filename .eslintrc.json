@@ -34,7 +34,10 @@
             "style": "kebab-case"
           }
         ],
-        "@angular-eslint/no-output-on-prefix": 0
+        "@angular-eslint/no-output-on-prefix": 0,
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@angular-eslint/no-empty-lifecycle-method": "off"
       }
     },
     {
