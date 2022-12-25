@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginPageComponent implements OnInit {
   isLoading: boolean = false;
-  email_address: string = "";
+  username: string = "";
   password: string = "";
 
   constructor(private router: Router) { }
@@ -22,7 +22,7 @@ export class LoginPageComponent implements OnInit {
     if (form.valid) {
       this.isLoading = true;
       let authenticationDetails = new AuthenticationDetails({
-          Username: this.email_address,
+          Username: this.username,
           Password: this.password,
       });
       let poolData = {
@@ -31,11 +31,11 @@ export class LoginPageComponent implements OnInit {
       };
 
       let userPool = new CognitoUserPool(poolData);
-      let userData = { Username: this.email_address, Pool: userPool };
+      let userData = { Username: this.username, Pool: userPool };
       var cognitoUser = new CognitoUser(userData);
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-          this.router.navigate(["main-grid-page"])
+          this.router.navigate(["/main-grid-page"])
         },
         onFailure: (err) => {
           alert(err.message || JSON.stringify(err));

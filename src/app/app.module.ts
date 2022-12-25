@@ -64,6 +64,7 @@ import { AngularSlickgridModule } from './modules/angular-slickgrid/modules/angu
 import 'flatpickr/dist/l10n/fr';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 
 // AoT requires an exported function for factories
@@ -137,6 +138,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     MainGridPageComponent,
     UserDetailsComponent,
     LoginPageComponent,
+    SignUpComponent,
   ],
   imports: [
     AppRoutingRoutingModule,

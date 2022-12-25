@@ -1,7 +1,7 @@
 
 <form (submit)="onSignIn(signInForm)" #signInForm="ngForm">
-  <label for="email"><b>Email address</b></label>
-  <input name="email" ngModel type="email" #emailInput="ngModel" [(ngModel)]="email_address" email placeholder="Enter Username" required>
+  <label for="username"><b>User Name</b></label>
+  <input name="username" ngModel type="text" #usernameInput="ngModel" [(ngModel)]="username" placeholder="Enter Username" required>
 
   <label for="password"><b>Password</b></label>
   <input [(ngModel)]="password" ngModel type="password" minlength="8" #passwordInput="ngModel" required name="password" placeholder="Enter Password" >
