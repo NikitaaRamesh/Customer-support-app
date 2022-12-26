@@ -1,4 +1,4 @@
-import { Component, enableProdMode, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, enableProdMode, OnInit, ViewEncapsulation , Input} from '@angular/core';
 import { link } from 'fs';
 import { Router } from '@angular/router';
 import { UserDetailsComponent } from '../user-details/user-details.component';
@@ -134,6 +134,9 @@ export class MainGridPageComponent implements OnInit {
     let cognitoUser = userPool.getCurrentUser();
     cognitoUser?.signOut();
     this.router.navigate(["login-page"])
+  }
+  exit(){
+    window.location.reload();
   }
 }
 
