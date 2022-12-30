@@ -7,7 +7,10 @@ import { map } from 'rxjs/operators';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
 
+
+
 import { AngularGridInstance, Column, GridOption, Formatters, Formatter, FieldType } from './../modules/angular-slickgrid'
+import { DataService } from '../data.service';
 
 interface DataItem {
   id: number;
@@ -23,10 +26,8 @@ interface DataItem {
 
 const ITEMSNo = 995;
 
-const customEnableButtonFormatter: Formatter<DataItem> = (_row: number, _cell: number, value: any) => {
-  return `<span style="margin-left: 5px">
-    <a routerLinkActive="active" [routerLink]="['/main-grid-page']">Link</a>
-    </span>`;
+const customEnableButtonFormatter: Formatter<DataItem> = (row: number, _cell: number, _value: any, dataContext:any) => {
+  return "<a style='color:#4996D0; text-decoration:none;cursor:pointer' onclick='navigateData(" + dataContext.Id + ", " + row + ")'>User detail</a>";;
 };
 
 @Component({
@@ -40,6 +41,9 @@ export class MainGridPageComponent implements OnInit {
   Welcome to User Management screen!
   `;
 
+
+  message!: string;
+
   columnDefinitions_1: Column[] = [];
   gridOptions_1: GridOption = {};
   dataset_1!: any[];
@@ -49,7 +53,9 @@ export class MainGridPageComponent implements OnInit {
     this.angularGrid = angularGrid;
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private data:DataService) { 
+    
+  }
 
 
   ngOnInit(): void {
@@ -59,14 +65,18 @@ export class MainGridPageComponent implements OnInit {
         id: 'username', name: 'Username', field: 'username', type: FieldType.number, sortable: true, formatter: customEnableButtonFormatter,
         onCellClick: (e, args) => {
           //this.toggleCompletedProperty(args && args.dataContext);
+          this.newMessage()
           this.router.navigate(['/main-grid-page/:id']);
         }
+
+        
       },
       { id: 'date-created', name: 'Date Created', field: 'dateCreated', formatter: Formatters.dateIso, width: 80, minWidth: 20, maxWidth: 150 },
       { id: 'organization-name', name: 'Organization name', field: 'organizationName', sortable: true },
       { id: 'unit-name', name: 'Unit name', field: 'unitName', sortable: true },
       { id: 'uuid', name: 'UUID', field: 'uuid', sortable: true },
-      { id: 'last-login-date', name: 'Last Login date', field: 'lastLoginDate', formatter: Formatters.dateIso }
+      { id: 'last-login-date', name: 'Last Login date', field: 'lastLoginDate', formatter: Formatters.dateIso },
+      
     ];
     this.gridOptions_1 = {
       alwaysShowVerticalScroll: true,
@@ -89,6 +99,9 @@ export class MainGridPageComponent implements OnInit {
     };
 
     this.dataset_1 = this.mockData(ITEMSNo);
+
+
+    this.data.currentMessage.subscribe(message => this.message = message)
 
   }
   mockData(count: number) {
@@ -138,6 +151,11 @@ export class MainGridPageComponent implements OnInit {
   exit(){
     window.location.reload();
   }
+
+  newMessage(){
+    this.data.changeMessage('hello')
+  }
+
 }
 
 
